@@ -576,7 +576,7 @@ export default {
         this.skipBack();
       }
     },
-    loadedmetadata() {
+    loadeddata() {
       if (this.error) return 0;
       if (this.autoPlay) {
         this.makeActive();

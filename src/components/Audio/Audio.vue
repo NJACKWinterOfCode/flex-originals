@@ -219,8 +219,6 @@ export default {
       this.currentTime = curmins + ":" + cursecs;
     },
     loadedmetadata() {
-      this.currentlyPlaying = true;
-      this.audio.play();
       let durmins = Math.floor(this.audio.duration / 60);
       let dursecs = Math.floor(this.audio.duration - durmins * 60);
 
@@ -231,6 +229,10 @@ export default {
         durmins = "0" + durmins;
       }
       this.trackDuration = durmins + ":" + dursecs;
+    },
+    loadeddata() {
+      this.currentlyPlaying = true;
+      this.audio.play();
     },
     halfTime: api.debounce(async function() {
       try {
