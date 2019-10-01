@@ -277,32 +277,14 @@ export default {
       this.$router.push("/app/@error");
     }
 
-    // this.$nextTick(()=>{
-    //       this.changeSong();
-    //   this.audio.loop = false;
-    // })
-    // window.addEventListener("mousedown", function(event) {
-    //   if (!isDraggable(event.target)) return false;
-
-    //   currentlyDragged = event.target;
-    //   let handleMethod = currentlyDragged.dataset.method;
-
-    //   this.addEventListener("mousemove", window[handleMethod], false);
-
-    //   window.addEventListener(
-    //     "mouseup",
-    //     () => {
-    //       currentlyDragged = false;
-    //       window.removeEventListener("mousemove", window[handleMethod], false);
-    //     },
-    //     false
-    //   );
-    // });
-    window.addEventListener("keydown", this.detectKeypress);
+    if (typeof window != "undefined") {
+      window.addEventListener("keydown", this.detectKeypress);
+    }
     this.audio.addEventListener("ended", this.handleEnded);
     this.audio.addEventListener("timeupdate", this.currTime);
     this.audio.addEventListener("progress", this.updateBuffer);
     this.audio.addEventListener("loadedmetadata", this.loadedmetadata);
+    this.audio.addEventListener("loadeddata", this.loadeddata);
     this.audio.addEventListener("timeupdate", this.handleProgress);
   },
   filters: {
@@ -312,11 +294,14 @@ export default {
   },
   beforeDestroy: function() {
     this.stopAudio();
-    window.removeEventListener("keydown", this.detectKeypress);
+    if (typeof window != "undefined") {
+      window.removeEventListener("keydown", this.detectKeypress);
+    }
     this.audio.removeEventListener("ended", this.handleEnded);
     this.audio.removeEventListener("timeupdate", this.currTime);
     this.audio.removeEventListener("progress", this.updateBuffer);
     this.audio.removeEventListener("loadedmetadata", this.loadedmetadata);
+    this.audio.removeEventListener("loadeddata", this.loadeddata);
     this.audio.removeEventListener("timeupdate", this.handleProgress);
     clearTimeout(this.checkingCurrentPositionInTrack);
   }
