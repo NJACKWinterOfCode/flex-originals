@@ -12,7 +12,6 @@ export default {
     autoPlay: false,
     error: false,
     src: "/public/qq.webp",
-    lazySrc: "/public/icons/music.svg",
     videoSource: "",
     videoId: "",
     analytic: "",
