@@ -1,6 +1,13 @@
 <template>
   <div class="embed__video">
-    <fo-video-player :error="error" :src="videoSource" v-if="!videoUnavaliable" :autoPlay="false"></fo-video-player>
+    <fo-video-player
+      :embed="true"
+      :error="error"
+      :videoInfo="video"
+      :src="videoSource"
+      v-if="!videoUnavaliable"
+      :autoPlay="false"
+    ></fo-video-player>
   </div>
 </template>
 

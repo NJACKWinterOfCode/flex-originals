@@ -5,9 +5,12 @@
     @mousemove="makeActive(); active = true; "
   >
     <div class="fo-video-top">
-      <div v-show="fullscreen && active" class="fo-video__info__fullscreen__title">{{ videoInfo.title}}</div>
+      <div
+        v-show="fullscreen && active"
+        class="fo-video__info__fullscreen__title"
+      >{{ videoInfo.title}}</div>
       <div class="fo-video-watch-later">
-        <img src="/public/tool_svg/018-clock.svg" width="30"/>
+        <img src="/public/tool_svg/018-clock.svg" width="30" />
       </div>
     </div>
     <!-- <div class="fo-video-player-overlay" v-show="!isPlaying && !loading" @click="playOrPause"></div> -->
@@ -50,7 +53,10 @@
       </nav>
     </div>
 
-    <div :class="`fo-video-player-menu no__animation seektime ${seekTime ? 'vactive' : ''}`" ref="seekTimeLeft">
+    <div
+      :class="`fo-video-player-menu no__animation seektime ${seekTime ? 'vactive' : ''}`"
+      ref="seekTimeLeft"
+    >
       <nav :class="`no__animation ${active && seekTime ? 'menu-active' : ''}`">
         <div class="time__preview" :style="`background-image: url('/${videoInfo.thumbImage}')`">
           <p>{{ seekTime }}</p>
@@ -133,6 +139,12 @@
       </nav>
     </div>
     <div :class="`fo-video-player__control-panel`" v-show="active">
+      <h1 class="fo-video-player__watch__on" v-show="embed">
+        <a
+          :href="`https://flexoriginals.ml/app/@watch?v=${videoInfo.id}`"
+          target="_blank"
+        >Flex Originals</a>
+      </h1>
       <div
         :class="`fo-video-player__seekbar-wrap`"
         @mousedown="grabSeekbar"
@@ -249,6 +261,10 @@ export default {
       type: Boolean,
       default: false
     },
+    embed: {
+      type: Boolean,
+      default: false
+    },
     autoPlay: {
       type: Boolean,
       default: false
@@ -290,7 +306,7 @@ export default {
       this.media.playbackRate = val;
     },
     src(val) {
-      if (this.error) return 0;
+      if (this.error && !val) return 0;
       this.loading = true;
       this.isPlaying = false;
       this.media.src = val;

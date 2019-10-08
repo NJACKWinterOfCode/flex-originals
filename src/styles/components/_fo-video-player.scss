@@ -276,6 +276,20 @@
       background: transparent;
       transition: bottom 0.5s ease-in-out;
     }
+
+    .fo-video-player__watch__on {
+      display: inline-block;
+      position: absolute;
+      bottom: 45px;
+      right: 15px;
+      text-align: right;
+      padding: 5px;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
   }
 
   .fo-video-player__control-wrap {
@@ -310,11 +324,11 @@
     &.settings {
       right: 10px;
     }
-    
+
     &.volume {
       right: 150px;
     }
-    
+
     &.no__animation {
       transition: none !important;
     }
@@ -397,7 +411,7 @@
         padding: 0;
         width: 220px;
       }
-      
+
       &.no__animation {
         transition: none !important;
       }
