@@ -55,7 +55,7 @@
     <div class="footer">
       <p>
         Don't have an account?
-        <a href="/signup">Sign up</a>
+        <router-link to="/signup">Sign up</router-link>
       </p>
       <br/>
       <p>
