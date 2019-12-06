@@ -63,8 +63,9 @@ You can run the following scripts with `yarn` or `npm` like `yarn install`
 - Change the branch:<br>
 	`git checkout new_branch_name`
 - Commit it :<br>
-	`git commit -m "changes in file"
-- Push your code 
+	`git commit -m "changes in file"`
+- Push your code :<br>
+	`git push origin branch_name`
 - Help on documentation :page_facing_up:
 
 Copyright (c) 2019, Anurag Kumar [Anurag Kumar](http://github.com/anu1601cs/)
