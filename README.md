@@ -54,16 +54,15 @@ You can run the following scripts with `yarn` or `npm` like `yarn install`
 ### Contributing 
 - Open issues :boom:
 - Raise PRs for issues :raised_hand:
-- Fork the repo and star it :star:
+- Fork the repo and star it :star:<br>
 	![image](https://user-images.githubusercontent.com/41269164/70351301-a1f78f80-188e-11ea-9ed2-c7677bf25ea2.png)
-- Clone it :
-	`https://github.com/NJACKWinterOfCode/flex-originals.git`
-	![image](https://user-images.githubusercontent.com/41269164/70351641-64dfcd00-188f-11ea-963a-0e232db6dcd8.png)
-- Some changes in the file :
+- Clone it :<br>
+	`https://github.com/NJACKWinterOfCode/flex-originals.git`<br>
+- Some changes in the file :<br>
 	`git add file_name`
-- Change the branch:
+- Change the branch:<br>
 	`git checkout new_branch_name`
-- Commit it :
+- Commit it :<br>
 	`git commit -m "changes in file"
 - Push your code 
 - Help on documentation :page_facing_up:
