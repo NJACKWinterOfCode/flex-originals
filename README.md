@@ -58,14 +58,14 @@ You can run the following scripts with `yarn` or `npm` like `yarn install`
 	![image](https://user-images.githubusercontent.com/41269164/70351301-a1f78f80-188e-11ea-9ed2-c7677bf25ea2.png)
 - Clone it :<br>
 	`https://github.com/NJACKWinterOfCode/flex-originals.git`<br>
-- Some changes in the file :<br>
-	`git add file_name`
 - Change the branch:<br>
 	`git checkout new_branch_name`
+- Some changes in the file & add :<br>
+	`git add file_name`
 - Commit it :<br>
 	`git commit -m "changes in file"`
 - Push your code :<br>
-	`git push origin branch_name`
+	`git push origin new_branch_name`
 - Help on documentation :page_facing_up:
 
 Copyright (c) 2019, Anurag Kumar [Anurag Kumar](http://github.com/anu1601cs/)
