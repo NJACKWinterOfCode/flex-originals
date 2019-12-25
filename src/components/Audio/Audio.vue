@@ -1,7 +1,13 @@
 <template>
-  <div :class="`music_player ${theme}`">
-    <div :class="`inner ${theme}`">
-      <p>{{musicPlaylist[currentSong] ? musicPlaylist[currentSong].title : 'Loading...'}}</p>
+  <div class="music_player">
+    <div class="inner">
+      <p>
+        {{
+          musicPlaylist[currentSong]
+            ? musicPlaylist[currentSong].title
+            : 'Loading...'
+        }}
+      </p>
       <br />
       <i
         :disabled="!currentSong"
@@ -9,17 +15,32 @@
         class="fa fa-step-backward"
         aria-hidden="true"
       ></i>
-      <i @click="playAudio()" v-show="currentlyPlaying" class="fa fa-pause" aria-hidden="true"></i>
-      <i @click="playAudio()" v-show="!currentlyPlaying" class="fa fa-play" aria-hidden="true"></i>
       <i
-        :disabled="currentSong == musicPlaylist.length-1"
+        @click="playAudio()"
+        v-show="currentlyPlaying"
+        class="fa fa-pause"
+        aria-hidden="true"
+      ></i>
+      <i
+        @click="playAudio()"
+        v-show="!currentlyPlaying"
+        class="fa fa-play"
+        aria-hidden="true"
+      ></i>
+      <i
+        :disabled="currentSong == musicPlaylist.length - 1"
         @click="nextSong()"
         class="fa fa-step-forward"
         aria-hidden="true"
       ></i>
       <div class="slider_container">
         <span class="time">{{ currentTime }}</span>
-        <div class="slider" ref="progress" @mousedown="scrub" data-direction="horizontal">
+        <div
+          class="slider"
+          ref="progress"
+          @mousedown="scrub"
+          data-direction="horizontal"
+        >
           <div class="audio-progress" :style="`width:${currentProgressBar}%`">
             <div class="circle"></div>
           </div>
@@ -27,14 +48,24 @@
           <!-- </div> -->
         </div>
         <span class="time">{{ trackDuration }}</span>
-        <i v-show="volume" class="audio-icon fa fa-volume-up" @click="volume = 0"></i>
+        <i
+          v-show="volume"
+          class="audio-icon fa fa-volume-up"
+          @click="volume = 0"
+        ></i>
         <i
           v-show="!volume"
           class="audio-icon fa fa-volume-off"
           aria-hidden="true"
           @click="volume = 6"
         ></i>
-        <input v-model="volume" type="range" min="0" max="10" class="slider audio" />
+        <input
+          v-model="volume"
+          type="range"
+          min="0"
+          max="10"
+          class="slider audio"
+        />
       </div>
       <i class="fa fa-random" aria-hidden="true"></i>
       <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -87,9 +118,6 @@ export default {
         item => item.id == this.$route.query.a,
       );
     },
-    theme() {
-      return this.$store.state.theme;
-    },
     audio() {
       return new Audio();
     },
@@ -112,12 +140,7 @@ export default {
         this.audio.duration
       ) {
         this.bufferPercent = this.audio.buffered.end(0) / this.audio.duration;
-      }
-      // Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
-      // to be anything other than 0. If the byte count is available we use this instead.
-      // Browsers that support the else if do not seem to have the bufferedBytes value and
-      // should skip to there. Tested in Safari 5, Webkit head, FF3.6, Chrome 6, IE 7/8.
-      else if (
+      } else if (
         this.audio &&
         this.audio.bytesTotal != undefined &&
         this.audio.bytesTotal > 0 &&
@@ -149,7 +172,12 @@ export default {
         this.stopAudio();
         this.currentSong = index;
       }
-      this.audioFile = '/' + this.musicPlaylist[this.currentSong].audioFile;
+
+      this.audioFile = this.$utils.getUrl(
+        this.musicPlaylist[this.currentSong].audioFile,
+        'audio',
+      );
+
       this.audio.src = this.audioFile;
       this.audio.volume = this.volume / 10;
       if (wasPlaying) {
@@ -163,7 +191,10 @@ export default {
       return false;
     },
     getCurrentSong: function(currentSong) {
-      return '/' + this.musicPlaylist[currentSong].audioFile;
+      return this.$utils.getUrl(
+        this.musicPlaylist[currentSong].audioFile,
+        'audio',
+      );
     },
     playAudio: function() {
       if (
@@ -272,7 +303,11 @@ export default {
       this.$router.push('/app/@error');
     }
 
-    // this.changeSong();
+    // const audio = await this.$store.dispatch('GET_AUDIO', {
+    //   id: this.$route.query.a,
+    // });
+
+    // console.log(audio);
 
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', this.detectKeypress);

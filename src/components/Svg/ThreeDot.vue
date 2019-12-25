@@ -4,20 +4,28 @@
     :style="`height:${height}; width:${height}; cursor:${cursor}`"
     @click="$emit('click')"
   >
-    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-      <use class="fo-svg-shadow" xlink:href="#fo-id-13" />
-      <path
-        class="fo-svg-fill"
-        d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
-        id="fo-id-13"
-      />
+    <svg
+      viewBox="0 0 24 24"
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+      class="style-scope fo-svg-fill"
+      :style="
+        `pointer-events: none; display: block; width: ${width}; height: ${height};`
+      "
+    >
+      <g class="style-scope yt-icon">
+        <path
+          d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+          class="style-scope yt-icon"
+        ></path>
+      </g>
     </svg>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'svg-forward',
+  name: 'svg-threedot',
   props: {
     cursor: {
       type: String,

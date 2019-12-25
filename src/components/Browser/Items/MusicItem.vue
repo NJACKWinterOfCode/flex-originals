@@ -3,7 +3,7 @@
     <div class="music__thumbnail">
       <router-link :to="`/app/@song?a=${item.id}`" v-show="!this.editMode">
         <lazy-image
-          :src="getSrc()"
+          :src="src"
           :lazySrc="lazySrc"
           hover
           :alt="item.title"
@@ -22,7 +22,7 @@
       </router-link>
       <lazy-image
         v-show="this.editMode"
-        :src="getSrc()"
+        :src="src"
         :lazySrc="lazySrc"
         hover
         :alt="item.title"
@@ -36,13 +36,14 @@
         aria-hidden="true"
       ></i>
 
-      <div :class="`audio__info ${theme}`">
-        <p class="title">{{getName()}}</p>
+      <div class="audio__info ">
+        <p class="title">{{ getName() }}</p>
         <p class="views">
           {{ item.user.username }}
-          <img src="/public/verified.svg" width="10" height="10" />
+          <fo-svg-verified width="10" height="10"></fo-svg-verified>
           <br />
-          {{ item.audioAnalytics ? item.audioAnalytics.views : '0' }} views . {{ $utils.time_ago(new Date(item.published)) }}
+          {{ item.audioAnalytics ? item.audioAnalytics.views : '0' }} views .
+          {{ $utils.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>
@@ -76,9 +77,6 @@ export default {
     editMode() {
       return this.$store.state.editMode;
     },
-    theme() {
-      return this.$store.state.theme;
-    },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {
         return item.id === this.item.id;
@@ -88,11 +86,7 @@ export default {
   },
   methods: {
     getSrc() {
-      if (this.src.includes('https')) {
-        return this.src;
-      } else {
-        return '/' + this.src;
-      }
+      return this.src;
     },
     open() {
       if (this.selected) {

@@ -10,7 +10,7 @@
     background-position: center;
     background-size: cover;
     display: inline-block;
-    margin: 5px 5px 50px 5px;
+    margin: 10px;
     position: relative;
     background-color: rgba(0, 0, 0, 0.1);
 
@@ -100,27 +100,8 @@
 
       p {
         bottom: -30px;
-        color: white;
         width: 100%;
       }
-
-      &.light .title {
-        color: black !important;
-      }
-
-      &.dark .views {
-        color: #f1ebeb !important;
-      }
-
-      &.light .views {
-        color: #383838 !important;
-      }
-    }
-
-    p {
-      bottom: -30px;
-      color: white;
-      width: 100%;
     }
 
     i {
@@ -155,21 +136,4 @@
   .music__thumbnail:hover .file-icon {
     display: block;
   }
-
-  //   @media only screen and (max-width: 700px) {
-  //     .music__thumbnail {
-  //       width: 150px;
-  //       height: 150px;
-  //       margin: 0px 5px 40px 10px;
-
-  //       i {
-  //         margin: auto;
-  //         position: absolute;
-  //         font-size: 40px;
-  //         color: white;
-  //         top: 50px;
-  //         left: 60px;
-  //       }
-  //     }
-  //   }
 }

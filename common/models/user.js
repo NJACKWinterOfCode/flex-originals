@@ -6,7 +6,7 @@ const app = require('../../server/server');
 const senderAddress = 'noreply@flexoriginales.com';
 
 module.exports = function(User) {
-  User.afterRemote('create', async function(context, user, next) {
+  User.afterRemote('create', function(context, user, next) {
     const Settings = app.models.Settings;
 
     var options = {
@@ -59,19 +59,33 @@ module.exports = function(User) {
         return next();
       });
     } else {
-      //
-      const tempUser = await User.findById(user.id);
-      tempUser.emailVerified = true;
-      tempUser.save();
+      User.findById(user.id, function(err, instance) {
+        instance.emailVerified = true;
+        instance.save();
 
-      context.result = {
-        title: 'Signed up successfully',
-        content: 'Signed up successfully for development environment.',
-        redirectTo: '/',
-      };
-
-      return next();
+        context.result = {
+          title: 'Signed up successfully',
+          content: 'Signed up successfully for development environment.',
+          redirectTo: '/',
+        };
+        return next();
+      });
     }
+
+    // user.verify(options, function(err) {
+    //   if (err) {
+    //     User.deleteById(user.id);
+    //     return next(err);
+    //   }
+    //   context.result = {
+    //     title: 'Signed up successfully',
+    //     content:
+    //       'Please check your email and click on the verification link ' +
+    //       'before logging in.',
+    //     redirectTo: '/',
+    //   };
+    //   return next();
+    // });
   });
 
   // Method to render

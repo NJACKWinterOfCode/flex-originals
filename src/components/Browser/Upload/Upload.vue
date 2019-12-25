@@ -1,5 +1,5 @@
 <template>
-  <div :class="`settings content ${theme}`">
+  <div class="settings content">
     <div class="inner" v-show="isAllowed">
       <div class="media-action">
         <div class="file">
@@ -31,28 +31,43 @@
             </div>
             <div class="container" v-if="isUploading">
               <form enctype="multipart/form-data" ref="formFileThumbnail">
-                <input type="file" hidden ref="inputFileThumbnail" @change="processThumb" />
+                <input
+                  type="file"
+                  hidden
+                  ref="inputFileThumbnail"
+                  @change="processThumb"
+                />
               </form>
               <div class="grid grid--half">
                 <h3>Uploading Progress</h3>
                 <div class="video__upload__progress">
                   <div
                     class="upload__progress"
-                    :style="`width:${uploadPercent}%; background-color:${!isProcessing ? '#43b581' :''}!important`"
+                    :style="
+                      `width:${uploadPercent}%; background-color:${
+                        !isProcessing ? '#43b581' : ''
+                      }!important`
+                    "
                   >
-                    <p>{{uploadPercent}}%</p>
+                    <p>{{ uploadPercent }}%</p>
                   </div>
                 </div>
                 <div class="thumbnails__wrapper" v-show="type == 'video'">
                   <h3>Select Thumbnail</h3>
                   <div
-                    :class="`video__thumbnails ${uploadData && uploadData.thumbImage == thumb ? 'selected' : ''}`"
-                    v-for="(thumb, i ) in thumbnails"
+                    :class="
+                      `video__thumbnails ${
+                        uploadData && uploadData.thumbImage == thumb
+                          ? 'selected'
+                          : ''
+                      }`
+                    "
+                    v-for="(thumb, i) in thumbnails"
                     :key="i"
                   >
                     <img
                       class="fo-image"
-                      :src="`/${thumb}`"
+                      :src="$utils.getUrl(thumb, 'image')"
                       alt="thumbnail"
                       @click="uploadData.thumbImage = thumb"
                     />
@@ -60,22 +75,29 @@
                   <div
                     class="click__wrapper video"
                     @click="$refs.inputFileThumbnail.click()"
-                  >Upload Thumbnail</div>
+                  >
+                    Upload Thumbnail
+                  </div>
                 </div>
                 <div
                   class="thumbnails__wrapper"
-                  v-show=" type != 'video' && (type == 'audio' || isThumbUpload ) "
+                  v-show="type != 'video' && (type == 'audio' || isThumbUpload)"
                 >
                   <div
                     v-show="uploadData.thumbImage == ''"
                     class="click__wrapper"
                     @click="$refs.inputFileThumbnail.click()"
-                  >Upload Thumbnail</div>
-                  <div class="audio__image__wrapper" v-show="uploadData.thumbImage != ''">
+                  >
+                    Upload Thumbnail
+                  </div>
+                  <div
+                    class="audio__image__wrapper"
+                    v-show="uploadData.thumbImage != ''"
+                  >
                     <img
                       @click="$refs.inputFileThumbnail.click()"
                       class="fo-image"
-                      :src="`/${uploadData.thumbImage}`"
+                      :src="$utils.getUrl(uploadData.thumbImage, 'image')"
                       alt="thumbnail"
                     />
                   </div>
@@ -83,7 +105,12 @@
                 <div class="upload__video__settings">
                   <div class="video__title">
                     <label for="videoTitle">Title</label>
-                    <input v-model="uploadData.title" name="title" type="text" placeholder="Title" />
+                    <input
+                      v-model="uploadData.title"
+                      name="title"
+                      type="text"
+                      placeholder="Title"
+                    />
                   </div>
                   <div class="video__description">
                     <label for="description">Description</label>
@@ -97,12 +124,20 @@
                   </div>
                   <div class="video__tags">
                     <label for="tags">Tags</label>
-                    <input v-model="uploadData.tags" name="tags" type="text" placeholder="Tags" />
+                    <input
+                      v-model="uploadData.tags"
+                      name="tags"
+                      type="text"
+                      placeholder="Tags"
+                    />
                   </div>
                   <div class="form-item">
                     <label class="form-item__label">Visibility</label>
                     <div class="form-item__control">
-                      <select class="control control--select" v-model="uploadData.visibility">
+                      <select
+                        class="control control--select"
+                        v-model="uploadData.visibility"
+                      >
                         <option value="1" selected="selected">Public</option>
                         <option value="0">Private</option>
                       </select>
@@ -113,7 +148,9 @@
               <div class="grid grid--half">
                 <h3>Advanced Settings</h3>
                 <div class="form-item">
-                  <label class="form-item__label">Keep all my liked private</label>
+                  <label class="form-item__label"
+                    >Keep all my liked private</label
+                  >
                   <div
                     class="form-item__control toggle"
                     :class="uploadData.likedPrivate ? 'is-on' : ''"
@@ -123,24 +160,39 @@
                   </div>
                 </div>
                 <div class="checkbox">
-                  <input id="one" type="checkbox" v-model="uploadData.allowComments" />
+                  <input
+                    id="one"
+                    type="checkbox"
+                    v-model="uploadData.allowComments"
+                  />
                   <span class="check"></span>
                   <label for="one">Allow Comments</label>
                 </div>
                 <div class="checkbox">
-                  <input id="two" type="checkbox" v-model="uploadData.ratings" />
+                  <input
+                    id="two"
+                    type="checkbox"
+                    v-model="uploadData.ratings"
+                  />
                   <span class="check"></span>
                   <label for="two">Users can view ratings for this video</label>
                 </div>
                 <div class="checkbox">
-                  <input id="three" type="checkbox" v-model="uploadData.agerestriction" />
+                  <input
+                    id="three"
+                    type="checkbox"
+                    v-model="uploadData.agerestriction"
+                  />
                   <span class="check"></span>
                   <label for="three">Age restrictions</label>
                 </div>
                 <div class="form-item">
                   <label class="form-item__label">Category</label>
                   <div class="form-item__control">
-                    <select class="control control--select" v-model="uploadData.category">
+                    <select
+                      class="control control--select"
+                      v-model="uploadData.category"
+                    >
                       <option selected="selected">People & Blog</option>
                       <option>Gamming</option>
                       <option>Education</option>
@@ -149,9 +201,14 @@
                   </div>
                 </div>
                 <div class="form-item">
-                  <label class="form-item__label">Licence and rights ownership</label>
+                  <label class="form-item__label"
+                    >Licence and rights ownership</label
+                  >
                   <div class="form-item__control">
-                    <select class="control control--select" v-model="uploadData.licence">
+                    <select
+                      class="control control--select"
+                      v-model="uploadData.licence"
+                    >
                       <option selected="selected">Flex Originals</option>
                       <option>Other Creators</option>
                     </select>
@@ -161,7 +218,9 @@
                   :disabled="isProcessing"
                   class="fo-settings-button success"
                   @click="finilize()"
-                >Publish</button>
+                >
+                  Publish
+                </button>
               </div>
             </div>
           </div>
@@ -187,10 +246,10 @@ export default {
       type: '',
       uploadId: null,
       thumbnails: [
-        `public/loading.gif`,
-        `public/loading.gif`,
-        `public/loading.gif`,
-        `public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
+        `/public/loading.gif`,
       ],
       uploadData: {
         title: '',
@@ -208,9 +267,6 @@ export default {
     };
   },
   computed: {
-    theme() {
-      return this.$store.state.theme;
-    },
     uploadPercent() {
       return this.$store.state.uploadPercent;
     },
@@ -255,7 +311,8 @@ export default {
           const formData = new FormData();
           formData.append('files', file);
           setTimeout(() => {
-            this.processUpload(formData);
+            // console.log(formData, event.dataTransfer);
+            this.processUpload(formData, event.dataTransfer);
           }, 1000);
         }
       }
@@ -278,6 +335,10 @@ export default {
       }
 
       if (uploaded.data.res) {
+        // eslint-disable-next-line no-undef
+        uploaded.data.res.path = Buffer.from(uploaded.data.res.path).toString(
+          'base64',
+        );
         this.uploadData.thumbImage = uploaded.data.res.path;
         this.thumbnails.push(uploaded.data.res.path);
       }

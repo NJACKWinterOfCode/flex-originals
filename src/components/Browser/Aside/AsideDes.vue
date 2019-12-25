@@ -1,7 +1,9 @@
 <template>
-  <aside :class="`features ${theme}`">
+  <aside class="features">
     <header class="features-header focusable">
-      <img class="features-header-name" src="/public/text_logo2.png" alt="logo" />
+      <div class="features-header-name">
+        <h1>Flex Originals</h1>
+      </div>
     </header>
     <section class="features-list">
       <header class="features-list-header focusable">
@@ -24,8 +26,8 @@
       </ul>
     </section>
 
-    <footer :class="`features-footer ${theme}`">
-      <router-link :to="`/app/@channel/${user.id}`">
+    <footer class="features-footer">
+      <router-link v-show="user.id" :to="`/app/@channel/${user.id}`">
         <img
           class="avatar"
           alt="Avatar"
@@ -33,10 +35,17 @@
           style="cursor:pointer"
         />
       </router-link>
-      <!-- <div class="features-footer-details">
-        <span class="username">{{user.realm || 'Anonymous'}}</span>
-        <span class="tag">{{user.username || 'Flex'}}</span>
-      </div>-->
+      <img
+        v-show="!user.id"
+        class="avatar"
+        alt="Avatar"
+        :src="'/public/icons/logo.png'"
+        style="cursor:pointer"
+      />
+      <div class="features-footer-details">
+        <span class="username">{{ user.realm || 'Anonymous' }}</span>
+        <span class="tag">{{ user.username || 'Flex' }}</span>
+      </div>
       <div class="features-footer-controls button-group">
         <button role="button" aria-label="Mute" class="button button-mute">
           <i class="fa fa-headphones"></i>
@@ -45,7 +54,11 @@
           <i class="fa fa-microphone"></i>
         </button>
         <router-link to="/app/@settings">
-          <button role="button" aria-label="Settings" class="button button-settings">
+          <button
+            role="button"
+            aria-label="Settings"
+            class="button button-settings"
+          >
             <i class="fa fa-cog"></i>
           </button>
         </router-link>
@@ -65,9 +78,6 @@ export default {
   computed: {
     settings() {
       return this.$store.state.settings;
-    },
-    theme() {
-      return this.$store.state.theme;
     },
     channels() {
       return this.$store.state.following;

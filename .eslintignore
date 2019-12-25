@@ -1,2 +1,6 @@
 build/
 dist/
+common/
+server/
+cdn/
+client/

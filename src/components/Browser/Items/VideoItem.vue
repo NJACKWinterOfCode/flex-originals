@@ -2,12 +2,22 @@
   <div class="content-v-thumb">
     <div class="video__thumbnail">
       <router-link :to="`/app/@watch?v=${item.id}`" v-show="!this.editMode">
-        <lazy-image :src="getSrc()" :lazySrc="lazySrc" hover :active="selected" :alt="item.title"></lazy-image>
-        <i class="fas fa-play fa-2x file-icon" aria-hidden="true" v-show="!editMode"></i>
+        <lazy-image
+          :src="src"
+          :lazySrc="lazySrc"
+          hover
+          :active="selected"
+          :alt="item.title"
+        ></lazy-image>
+        <i
+          class="fas fa-play fa-2x file-icon"
+          aria-hidden="true"
+          v-show="!editMode"
+        ></i>
       </router-link>
       <lazy-image
         v-show="this.editMode"
-        :src="getSrc()"
+        :src="src"
         :lazySrc="lazySrc"
         hover
         :alt="item.title"
@@ -15,18 +25,14 @@
         @click="open"
       ></lazy-image>
       <i class="far fa-2x fa-check-circle" v-show="selected"></i>
-      <div :class="`video__info ${theme}`">
-        <p class="title">{{getName()}}</p>
+      <div class="video__info ">
+        <p class="title">{{ getName() }}</p>
         <p class="views">
           {{ item.user.username }}
-          <img
-            src="/public/verified.svg"
-            width="10"
-            height="10"
-            alt="verified"
-          />
+          <fo-svg-verified width="10" height="10"></fo-svg-verified>
           <br />
-          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views . {{ $utils.time_ago(new Date(item.published)) }}
+          {{ item.videoAnalytics ? item.videoAnalytics.views : '0' }} views .
+          {{ $utils.time_ago(new Date(item.published)) }}
         </p>
       </div>
     </div>
@@ -57,9 +63,6 @@ export default {
     editMode() {
       return this.$store.state.editMode;
     },
-    theme() {
-      return this.$store.state.theme;
-    },
     selected() {
       const res = this.$store.state.selectedItems.filter(item => {
         return item.id === this.item.id;
@@ -69,11 +72,7 @@ export default {
   },
   methods: {
     getSrc() {
-      if (this.src.includes('https')) {
-        return this.src;
-      } else {
-        return '/' + this.src;
-      }
+      return this.src;
     },
     open() {
       if (this.selected) {
@@ -89,7 +88,7 @@ export default {
       }
     },
     getName: function() {
-      const len = 20;
+      const len = 30;
       if (this.item.title.length >= len) {
         return this.item.title.substring(0, len) + '..';
       } else {
