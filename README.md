@@ -21,21 +21,21 @@
   <img width="100%"  src="docs/images/project.png">
 </p>
 
-**Flex Originals** is an **opensource** project. Contributions are welcome
+**Flex Originals** is an **opensource** project. Contributions are welcome.
 
 **Road Map**
 
-1. Improve UI
-2. Improve Server
-3. Improve CDN
-4. Improve Players Video & Audio
-5. Add redis
+1. Improve UI.
+2. Improve Server.
+3. Improve CDN.
+4. Improve Players Video & Audio.
+5. Add redis.
 6. Add video and audio processing.
 7. Make distributed server.
 
 ## Project Setup & Scripts
 
-1. ffmpeg
+1. FFmpeg
 2. Ngnix Server
 3. Docker & Compose
 4. MongoDB
@@ -59,10 +59,11 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
 - Node installation on Ubuntu
   You can install nodejs and npm easily with apt install, just run the following commands.
       `$ sudo apt install nodejs`
+      
       `$ sudo apt install npm`
 - Other Operating Systems
   You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
-If the installation was successful, you should be able to run the following command.M<br>
+If the installation was successful, you should be able to run the following command.<br>
     `$ node --version`
 
     `$ npm --version`
@@ -91,7 +92,7 @@ Follow this to install MongoDB in your computer.
 `sudo apt-get install frei0r-plugins`  
 
 ### Contributing 
-- Open issues :boom:
+- [Open-issues](https://github.com/NJACKWinterOfCode/flex-originals/issues/new/choose) :boom:
 - Raise PRs for issues :raised_hand:
 - Fork the repo and star it :star:<br>
 	![image](https://user-images.githubusercontent.com/41269164/70351301-a1f78f80-188e-11ea-9ed2-c7677bf25ea2.png)
@@ -104,4 +105,4 @@ Follow this to install MongoDB in your computer.
 - For production run in docker `sudo docker-compose up --build -d` with nginix server to reverse proxy to ports use this [settings](https://github.com/NJACKWinterOfCode/flex-originals/blob/feature/scripts/default).
 
 
-Copyright (c) 2019, Anurag Kumar [Anurag Kumar](http://github.com/anu1601cs/)
+Copyright (c) 2019, [Anurag Kumar](http://github.com/anu1601cs/)
